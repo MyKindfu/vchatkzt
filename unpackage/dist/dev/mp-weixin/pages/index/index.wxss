@@ -24,6 +24,13 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.menu-main.data-v-57280228 {
+  margin-bottom: 14px;
+}
+.iconfont.data-v-57280228 {
+  font-size: 30px;
+  color: #333333;
+}
 .container.data-v-57280228 {
   height: 100%;
   width: 100%;
@@ -66,5 +73,41 @@
 }
 .container-main.data-v-57280228 {
   height: calc(100% - 100px);
+  background-color: #F5F5F5;
+  padding: 10px;
+}
+.container-main-header.data-v-57280228 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+  margin: 10px 0;
+}
+.menu-list-header.data-v-57280228 {
+  font-size: 14px;
+  color: #999;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.menu-list-content.data-v-57280228 {
+  -webkit-box-shadow: 4px 0px 7px #ccc;
+          box-shadow: 4px 0px 7px #ccc;
+  background: #fff;
+  padding: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.menu-list-content .menu-li.data-v-57280228 {
+  width: calc(100% / 3);
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #999;
 }
 

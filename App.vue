@@ -14,4 +14,11 @@
 
 <style lang="scss" scoped>
 	/*每个页面公共css */
+	@import url("~@/static/iconfont.css");
+	/*设置字体图标*/
+	.iconfont {
+	    font-family: "iconfont" !important;
+	    font-size: 1em;
+	    font-style: normal;
+	}
 </style>

@@ -25,4 +25,100 @@
 /* 透明度 */
 /* 文章场景相关 */
 /*每个页面公共css */
+@font-face {
+  font-family: 'iconfont';  /* project id 2331009 */
+  src: url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.eot');
+  src: url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.woff') format('woff'),
+  url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.svg#iconfont') format('svg');
+}
+.iconfont.data-v-472cff63 {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.iconiconset0114.data-v-472cff63:before {
+  content: "\e60d";
+}
+.icontouxiang.data-v-472cff63:before {
+  content: "\e655";
+}
+.iconsuo.data-v-472cff63:before {
+  content: "\e6a0";
+}
+.iconshenpi.data-v-472cff63:before {
+  content: "\e679";
+}
+.iconnotepad__easy.data-v-472cff63:before {
+  content: "\e600";
+}
+.iconicon_app_examine_.data-v-472cff63:before {
+  content: "\e7d7";
+}
+ext[class*="icon-"].data-v-472cff63,
+view[class*="icon-"].data-v-472cff63,
+button[class*="icon-"].data-v-472cff63 {
+    font-family: "iconfont";
+    font-size: inherit;
+    font-style: normal;
+}
+/*设置字体图标*/
+.iconfont.data-v-472cff63 {
+  font-family: "iconfont" !important;
+  font-size: 1em;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'iconfont';  /* project id 2331009 */
+  src: url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.eot');
+  src: url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.woff') format('woff'),
+  url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_2331009_kdazgtwq5l8.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconiconset0114:before {
+  content: "\e60d";
+}
+
+.icontouxiang:before {
+  content: "\e655";
+}
+
+.iconsuo:before {
+  content: "\e6a0";
+}
+
+.iconshenpi:before {
+  content: "\e679";
+}
+
+.iconnotepad__easy:before {
+  content: "\e600";
+}
+
+.iconicon_app_examine_:before {
+  content: "\e7d7";
+}
+
+ext[class*="icon-"],
+view[class*="icon-"],
+button[class*="icon-"] {
+    font-family: "iconfont";
+    font-size: inherit;
+    font-style: normal;
+}
