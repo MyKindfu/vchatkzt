@@ -10,8 +10,8 @@
 		   > 
 		   <view class="app-header">
 			   <view class="left-header">
-					<view class="left-header-title">浠诲姟绠＄悊绯荤粺</view>
-					<view class="left-header-text">	绠＄悊浣犵殑宸ヤ綔锛岃浣犵殑鐢熸椿鏇存湁鍝佽川</view>
+					<view class="left-header-title">任务管理系统</view>
+					<view class="left-header-text">	管理你的工作，让你的生活更有品质</view>
 				</view>
 				<view class="right-header">
 					<image src="../../static/image/indeximg.png" mode=""></image>
@@ -20,24 +20,24 @@
 			
 		   <view class="container-main">
 				<view class="container-main-header">
-					娆㈣繋鍥炴潵锛岀帇鏄捐嫍
+					欢迎回来，王显苗
 				</view>
 				
 				   <view class="menu-main">
-						<view class="menu-list-header">涓氬姟瀹℃壒</view>
+						<view class="menu-list-header">业务审批</view>
 						<view class="menu-list-content">
 							<view class="menu-li" v-for="item in 10" :key="item">
 								<view class="iconfont iconshenpi"></view>
-								<view>鍑嗗叆瀹℃壒</view>
+								<view>准入审批</view>
 							</view>
 						</view>
 				   </view>
 				   <view class="menu-main">
-						<view class="menu-list-header">涓氬姟瀹℃壒</view>
+						<view class="menu-list-header">业务审批</view>
 						<view class="menu-list-content">
 							<view class="menu-li" v-for="item in 10" :key="item">
 								<view class="iconfont iconshenpi"></view>
-								<view>鍑嗗叆瀹℃壒</view>
+								<view>准入审批</view>
 							</view>
 						</view>
 				   </view>
@@ -75,14 +75,14 @@
 				this.$request(this.$urlConfig.oa + `/srm/oa/reviewListByUserId?current=${this.current}&size=${this.size}`,'POST').then(res => {
 					console.log(res)
 					// console.log(this.$myDecrypt(res))
-				  // 鎵撳嵃璋冪敤鎴愬姛鍥炶皟
+				  // 打印调用成功回调
 				})
 			},
 			upper:function(e){
 				
 			},
 			lower:function(e) {
-				console.log('搴曢儴浜嗗摝---')
+				console.log('底部了哦---')
 			},
 			scroll: function(e){
 			}
@@ -103,44 +103,6 @@
 	  }
 		 
 	.container {
-		height: 100%;
-		width: 100%;
-		.app-header{
-			padding: 10px;
-			height: 100px;
-			background: #2f5bc2;
-			color: #fff;
-			font-size: 12px;
-			text-align: left;
-			display: flex;
-			justify-content: space-between;
-			
-		}
-		.left-header-title{
-			 margin-top: 10px;
-			font-size: 16px;
-			margin-bottom: 20px;
-			position: relative;
-		}
-		.left-header-title:after{
-			content: '';
-			width: 100px;
-			height: 1px;
-			background-color: #fff;
-			position: absolute;
-			bottom: -10px;
-			left: 0;
-		}
-		.left-header-text{
-			font-size: 12px;
-		}
-		.right-header{
-			image{
-				width: 137px;
-				height: 87px;
-			}
-		}
-				
 	}
 	.container-main{
 	  height: calc(100% - 100px);
