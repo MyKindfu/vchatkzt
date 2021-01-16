@@ -21,8 +21,9 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
+    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -40,7 +41,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "wxfd5098477aece0f4",
+  "appid": "touristappid",
   "projectname": "srm",
   "condition": {
     "search": {
