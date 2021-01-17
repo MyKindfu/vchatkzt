@@ -1,1 +1,5 @@
 /unpackage
+/node_modules
+/pages.json
+/manifest.json
+/package-lock.json

@@ -10,8 +10,8 @@
 		   > 
 		   <view class="app-header">
 			   <view class="left-header">
-					<view class="left-header-title">ÈÎÎñ¹ÜÀíÏµÍ³</view>
-					<view class="left-header-text">	¹ÜÀíÄãµÄ¹¤×÷£¬ÈÃÄãµÄÉú»î¸üÓĞÆ·ÖÊ</view>
+					<view class="left-header-title">ä»»åŠ¡ç®¡ç†ç³»ç»Ÿ</view>
+					<view class="left-header-text">ç®¡ç†ä½ çš„å·¥ä½œè®©ä½ çš„ç”Ÿæ´»æ›´æœ‰å“è´¨</view>
 				</view>
 				<view class="right-header">
 					<image src="../../static/image/indeximg.png" mode=""></image>
@@ -20,44 +20,37 @@
 			
 		   <view class="container-main">
 				<view class="container-main-header">
-					»¶Ó­»ØÀ´£¬ÍõÏÔÃç
+					æ¬¢è¿å›æ¥ï¼Œ{{loginUser.name}}
 				</view>
-				
-				   <view class="menu-main">
-						<view class="menu-list-header">ÒµÎñÉóÅú</view>
-						<view class="menu-list-content">
-							<view class="menu-li" v-for="item in 10" :key="item">
-								<view class="iconfont iconshenpi"></view>
-								<view>×¼ÈëÉóÅú</view>
+				   <view class="menu-main" v-for="(item, index) in menuDataList" :key="index" v-if="item.menuChildList.length > 0">
+						<view class="menu-list-header">{{item.name}}</view>
+						<view class="menu-list-content" v-if="item.menuChildList.length > 0">
+							<view class="menu-li" v-for="(menu,index2) in item.menuChildList" :key="index2" @click="checkMenu(menu)">
+								<view class="iconfont iconshenpi" :class="menu.minniAppIcon"></view>
+								<view>{{menu.name}}</view>
+								<uni-badge style="position: absolute; right: 22px;top: 0;" v-if="menu.count" :text="menu.count" type="error"></uni-badge>
 							</view>
 						</view>
-				   </view>
-				   <view class="menu-main">
-						<view class="menu-list-header">ÒµÎñÉóÅú</view>
-						<view class="menu-list-content">
-							<view class="menu-li" v-for="item in 10" :key="item">
-								<view class="iconfont iconshenpi"></view>
-								<view>×¼ÈëÉóÅú</view>
-							</view>
-						</view>
-				   </view>
-					
-		   </view>
-						 
+				   </view>	
+		   </view>		 
 	   </scroll-view>
-	
-
-	 
 	</view>
 </template>
 
 <script>
+	import uniBadge from "@/components/uni-badge/uni-badge.vue"
 	export default {
+		components: {uniBadge},
 		data() {
 			return {
 				pageHeight: 0,
 				current: 1,
-				size: 10
+				size: 10,
+				menuData: [],
+				loginUser: uni.getStorageSync('loginUser'),
+				BadgeKey: [],
+				DataNum: [],
+				menuDataList: []
 			}
 		},
 		onReady: function() {
@@ -72,17 +65,60 @@
 		},
 		methods: {
 			getData () {
-				this.$request(this.$urlConfig.oa + `/srm/oa/reviewListByUserId?current=${this.current}&size=${this.size}`,'POST').then(res => {
-					console.log(res)
-					// console.log(this.$myDecrypt(res))
-				  // ´òÓ¡µ÷ÓÃ³É¹¦»Øµ÷
+				this.$request(this.$urlConfig.user + `/srm/users/getMobileMenu`,'GET').then(res => {
+					if(res.code == 0){
+						this.menuData = res.data
+						this.getBadgeKey(res.data)
+						this.getDataNum()
+					}
 				})
+			},
+			getBadgeKey(data) {
+				data.forEach((item, index) => {
+					if(item.badgeKey) this.BadgeKey.push(item.badgeKey)
+					if(item.menuChildList.length > 0) this.getBadgeKey(item.menuChildList)
+				})
+			},
+			getDataNum() {
+				console.log(this.BadgeKey)
+			   	this.$request(this.$urlConfig.oa + `/srm/oa/reviewCount?processKey=${this.BadgeKey.join(',')}`,'GET').then(res => {
+			   		if(res.code == 0){
+						this.DataNum = res.data
+						this.menuDataList = this.setMenu(this.menuData)
+							console.log('è·å–å==',this.menuDataList)
+			   		}
+			   	})
+			},
+			setMenu(data) {
+				data.forEach((item) => {
+					this.DataNum.forEach((obj) =>{
+						if(item.badgeKey == obj.processKey){
+							item.count = obj.count
+						}
+						if(item.menuChildList.length > 0) this.setMenu(item.menuChildList)
+					})
+				})
+				console.log(data)
+				return data
+			},
+			/**
+			 * é€‰æ‹©èœå•
+			 * @param {Object} item
+			 */
+			checkMenu(item) {
+				console.log(item.router.split("?")[0])
+				let count = null
+				if(item.count > 0) count = item.count
+				console.log(`/pages/${item.router.split("?")[0]}/item.router&${item.count}`)
+				uni.navigateTo({
+				    url: `/pages/${item.router.split("?")[0]}/${item.router}&count=${count}&name=${item.name}`
+				});
 			},
 			upper:function(e){
 				
 			},
 			lower:function(e) {
-				console.log('µ×²¿ÁËÅ¶---')
+				
 			},
 			scroll: function(e){
 			}
@@ -103,6 +139,44 @@
 	  }
 		 
 	.container {
+		height: 100%;
+		width: 100%;
+		.app-header{
+			padding: 10px;
+			height: 100px;
+			background: #2f5bc2;
+			color: #fff;
+			font-size: 12px;
+			text-align: left;
+			display: flex;
+			justify-content: space-between;
+			
+		}
+		.left-header-title{
+			 margin-top: 10px;
+			font-size: 16px;
+			margin-bottom: 20px;
+			position: relative;
+		}
+		.left-header-title:after{
+			content: '';
+			width: 100px;
+			height: 1px;
+			background-color: #fff;
+			position: absolute;
+			bottom: -10px;
+			left: 0;
+		}
+		.left-header-text{
+			font-size: 12px;
+		}
+		.right-header{
+			image{
+				width: 137px;
+				height: 87px;
+			}
+		}
+				
 	}
 	.container-main{
 	  height: calc(100% - 100px);
@@ -138,6 +212,7 @@
 		  text-align: center;
 		  font-size: 14px;
 		  color: #999;
+		  position: relative;
 		  .iconfont{
 			 
 		  }

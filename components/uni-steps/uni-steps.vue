@@ -4,6 +4,7 @@
 			<view :class="[direction==='column'?'uni-steps__column-text-container':'uni-steps__row-text-container']">
 				<view v-for="(item,index) in options" :key="index" :class="[direction==='column'?'uni-steps__column-text':'uni-steps__row-text']">
 					<text :style="{color:index<=active?activeColor:deactiveColor}" :class="[direction==='column'?'uni-steps__column-title':'uni-steps__row-title']">{{item.title}}</text>
+					<text :style="{color:index<=active?activeColor:deactiveColor}" :class="[direction==='column'?'uni-steps__column-detail':'uni-steps__row-detail']">{{item.detail}}</text>
 					<text :style="{color:index<=active?activeColor:deactiveColor}" :class="[direction==='column'?'uni-steps__column-desc':'uni-steps__row-desc']">{{item.desc}}</text>
 				</view>
 			</view>
@@ -149,7 +150,13 @@
 		text-align: left;
 		line-height: 18px;
 	}
-
+	
+	.uni-steps__column-detail{
+		font-size: $uni-font-size-base;
+		text-align: left;
+		line-height: 18px;
+	}
+	
 	.uni-steps__row-desc {
 		font-size: 12px;
 		line-height: 14px;

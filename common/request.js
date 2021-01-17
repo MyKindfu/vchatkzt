@@ -1,4 +1,4 @@
-const baseUrl = 'http://39.98.57.122:7991'  
+const baseUrl = 'http://39.98.57.122:7998'  
 import {myDecrypt, setAseEncryption} from './encryption'
 let encrypted
 const request = (url = '', date = {}, type = 'GET', header = {
@@ -10,6 +10,8 @@ const request = (url = '', date = {}, type = 'GET', header = {
 				SVavTBrYY: dataPost
 			}
 		}
+		if(uni.getStorageSync('token')) header.token = uni.getStorageSync('token')
+		
         uni.request({
             method: type,
             url: baseUrl + url,
