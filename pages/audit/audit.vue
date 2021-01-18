@@ -29,65 +29,45 @@
 			@scrolltolower="lower">
 				 <view class="detail" v-for="(item,index) in list" :key='index'>
 					<view class="detail-ul">
-						<text>计划名称：</text>
-						<text>{{item.form.planName}}</text>
-					</view>
-					<view class="detail-ul">
-						<text>计划编号：</text>
-						<text>{{item.form.coded ? item.coded : '无'}}</text>
-					</view>
-					<view class="detail-ul">
-						<text>计划类型：</text>
-						<text>{{pagesQuery.name}}</text>
-					</view>
-					<view class="detail-ul">
-						<text>申请人：</text>
-						<text>{{item.form.applyName}}</text>
-					</view>
-					<view class="detail-ul">
-						<text>申请部门：</text>
-						<text>{{item.form.department}}</text>
-					</view>
-					<view class="detail-ul">
 						<text>物料名称：</text>
-						<text>{{item.form.materiel.name}}</text>
-					</view>
-					<view class="detail-ul">
-						<text>物料类型：</text>
-						<text>{{item.form.materiel.typeName}}</text>
+						<text>{{JSON.parse(item.form.materielJson).name}}</text>
 					</view>
 					<view class="detail-ul">
 						<text>规格型号：</text>
-						<text>{{item.form.materiel.model}}</text>
+						<text>{{JSON.parse(item.form.materielJson).model}}</text>
 					</view>
 					<view class="detail-ul">
-						<text>计件单位：</text>
-						<text>{{item.form.materiel.unit}}</text>
+						<text>占用量：</text>
+						<text>{{JSON.parse(item.form.materielJson).occupy}}</text>
 					</view>
 					<view class="detail-ul">
-						<text>原品牌推荐：</text>
-						<text>{{item.form.materiel.recommend}}</text>
+						<text>计量单位：</text>
+						<text>{{JSON.parse(item.form.materielJson).unit}}</text>
 					</view>
 					<view class="detail-ul">
-						<text>使用位置：</text>
-						<text>{{item.form.useLocal}}</text>
+						<text>用途：</text>
+						<text>{{JSON.parse(item.form.materielJson).purpose}}</text>
 					</view>
 					<view class="detail-ul">
-						<text>需求数量：</text>
-						<text>{{item.form.total}}</text>
+						<text>原/推荐品牌：</text>
+						<text>{{JSON.parse(item.form.materielJson).recommend}}</text>
 					</view>
 					<view class="detail-ul">
-						<text>需求日期：</text>
-						<text>{{item.form.demandDate}}</text>
+						<text>申请人：</text>
+						<text>{{JSON.parse(item.form.materielJson).applyName}}</text>
 					</view>
 					<view class="detail-ul">
-						<text>提交日期：</text>
-						<text>{{item.form.createDatetime | formatDate}}</text>
+						<text>申请部门：</text>
+						<text>{{JSON.parse(item.form.materielJson).orgName}}</text>
 					</view>
 					<view class="detail-ul">
-						<text>审核状态：</text>
-						<text class="status">{{item.enumStatus | filterPlanEnumStatus}}</text>
-						<view class="more" @click="checkDetail(item)">查看更多
+						<text>审批流程：</text>
+						<text>{{JSON.parse(item.form.materielJson).srmProcessId}}</text>
+					</view>
+					<view class="detail-ul">
+						<text>创建时间：</text>
+						<text class="status">{{item.form.createDatetime | formatDate}}</text>
+						<view class="more">查看详情
 							<text class="iconfont iconxiangyou" style="font-size: 12px;"></text>
 						</view>
 					</view>
@@ -187,6 +167,8 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 						this.list = this.list.concat(res.data.records)
 						this.loadMore = 'more'
 						console.log(this.list)
+						console.log(JSON.parse(this.list[0].form.materielJson))
+						
 					}
 				})
 			},
@@ -237,18 +219,6 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 			},
 			pickstart(e) {
 				
-			},
-			/**查看详情
-			 * @param {Object} item
-			 */
-			checkDetail(item){
-				uni.navigateTo({
-				    url: `/pages/flowApprove/detail/detail?flowApprove=${JSON.stringify(item)}`,
-				});
-				console.log(item)
-				setTimeout(()=>{
-					 uni.$emit('flowApprove',item)
-				},100)
 			}
 		}
 	}

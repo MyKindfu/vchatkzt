@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   uniBadge: function() {
-    return __webpack_require__.e(/*! import() | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! @/components/uni-badge/uni-badge.vue */ 276))
+    return __webpack_require__.e(/*! import() | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then(__webpack_require__.bind(null, /*! @/components/uni-badge/uni-badge.vue */ 318))
   }
 }
 var render = function() {
@@ -134,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniBadge = function uniBadge() {__webpack_require__.e(/*! require.ensure | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then((function () {return resolve(__webpack_require__(/*! @/components/uni-badge/uni-badge.vue */ 276));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniBadge = function uniBadge() {__webpack_require__.e(/*! require.ensure | components/uni-badge/uni-badge */ "components/uni-badge/uni-badge").then((function () {return resolve(__webpack_require__(/*! @/components/uni-badge/uni-badge.vue */ 318));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -218,6 +218,7 @@ __webpack_require__.r(__webpack_exports__);
     getDataNum: function getDataNum() {var _this3 = this;
       console.log(this.BadgeKey);
       this.$request(this.$urlConfig.oa + "/srm/oa/reviewCount?processKey=".concat(this.BadgeKey.join(',')), 'GET').then(function (res) {
+        console.log(res);
         if (res.code == 0) {
           _this3.DataNum = res.data;
           _this3.menuDataList = _this3.setMenu(_this3.menuData);
@@ -242,12 +243,18 @@ __webpack_require__.r(__webpack_exports__);
         * @param {Object} item
         */
     checkMenu: function checkMenu(item) {
-      console.log(item.router.split("?")[0]);
       var count = null;
       if (item.count > 0) count = item.count;
-      console.log("/pages/".concat(item.router.split("?")[0], "/item.router&").concat(item.count));
+      var url = '';
+      console.log(item);
+      if (item.router.indexOf("?") != -1) {
+        url = "/pages/".concat(item.router.split("?")[0], "/").concat(item.router, "&count=").concat(count, "&name=").concat(item.name);
+      } else {
+        url = "/pages/".concat(item.router, "/").concat(item.router, "?processKey=").concat(item.badgeKey, "&count=").concat(count, "&name=").concat(item.name);
+      }
+      console.log(url);
       uni.navigateTo({
-        url: "/pages/".concat(item.router.split("?")[0], "/").concat(item.router, "&count=").concat(count, "&name=").concat(item.name) });
+        url: url });
 
     },
     upper: function upper(e) {

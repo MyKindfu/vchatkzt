@@ -1,4 +1,5 @@
-const baseUrl = 'http://39.98.57.122:7998'  
+const baseUrl = 'https://www.wolaidi.com'  
+// const baseUrl = 'http://39.98.57.122:7998'  
 import {myDecrypt, setAseEncryption} from './encryption'
 let encrypted
 const request = (url = '', date = {}, type = 'GET', header = {

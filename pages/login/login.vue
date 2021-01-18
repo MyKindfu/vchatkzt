@@ -111,6 +111,7 @@
 				})
 			},
 			login() {
+				
 				this.getUUID()
 				let t = this
 				console.log(this.checkedPwd)
@@ -121,6 +122,10 @@
 					uni.setStorageSync('pwd', t.pwd)
 				}
 			   if(this.userName != '' && this.pwd != ''){
+				   uni.showToast({
+				      icon: 'loading',
+				       title: '登录中',
+				   });
 				    let  keyStr = this.randomWord(false, 16)
 				   let  keyStr2 = this.randomWord(false, 16)
 				   let asePwd = this.setAse(keyStr,  this.pwd)
@@ -131,6 +136,7 @@
 					 password: this.pwd,
 					 username: this.userName
 				 }
+				 
 				   this.$request(
 					   this.$urlConfig.user + `/auth/loginByMobile`,
 					   params,
@@ -139,17 +145,21 @@
 						   sn: this.sn,
 						   from: 'MOBLIE',
 					   }).then(res => {
+						   uni.hideToast();
 							console.log(res)
 							if(res.code == 0){
 								 uni.setStorageSync('token', res.data.token)
 								  uni.setStorageSync('loginUser', res.data.loginUser)
-								uni.switchTab({
-									url: `/pages/index/index`,
+									uni.switchTab({
+										url: `/pages/index/index`,
+									});
+							}else{
+								uni.showToast({
+								   icon: 'none',
+								    title: res.msg,
+								    duration: 2000
 								});
 							}
-							uni.switchTab({
-								url: `/pages/index/index`,
-							});
 				   })
 			   }else{
 				   uni.showToast({

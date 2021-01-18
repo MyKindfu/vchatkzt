@@ -26,7 +26,7 @@
 						<view class="menu-list-header">{{item.name}}</view>
 						<view class="menu-list-content" v-if="item.menuChildList.length > 0">
 							<view class="menu-li" v-for="(menu,index2) in item.menuChildList" :key="index2" @click="checkMenu(menu)">
-								<view class="iconfont iconshenpi" :class="menu.minniAppIcon"></view>
+								<view class="iconfont" :class="menu.minniAppIcon"></view>
 								<view>{{menu.name}}</view>
 								<uni-badge style="position: absolute; right: 22px;top: 0;" v-if="menu.count" :text="menu.count" type="error"></uni-badge>
 							</view>
@@ -82,7 +82,8 @@
 			getDataNum() {
 				console.log(this.BadgeKey)
 			   	this.$request(this.$urlConfig.oa + `/srm/oa/reviewCount?processKey=${this.BadgeKey.join(',')}`,'GET').then(res => {
-			   		if(res.code == 0){
+			   		console.log(res)
+					if(res.code == 0){
 						this.DataNum = res.data
 						this.menuDataList = this.setMenu(this.menuData)
 							console.log('获取后==',this.menuDataList)
@@ -106,12 +107,18 @@
 			 * @param {Object} item
 			 */
 			checkMenu(item) {
-				console.log(item.router.split("?")[0])
 				let count = null
 				if(item.count > 0) count = item.count
-				console.log(`/pages/${item.router.split("?")[0]}/item.router&${item.count}`)
+				let url = ''
+				console.log(item)
+				if(item.router.indexOf("?") != -1){
+					url = `/pages/${item.router.split("?")[0]}/${item.router}&count=${count}&name=${item.name}`
+				} else{
+					url = `/pages/${item.router}/${item.router}?processKey=${item.badgeKey}&count=${count}&name=${item.name}`
+				}
+				console.log(url)
 				uni.navigateTo({
-				    url: `/pages/${item.router.split("?")[0]}/${item.router}&count=${count}&name=${item.name}`
+				    url: url
 				});
 			},
 			upper:function(e){
